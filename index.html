@@ -1,11 +1,170 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Lemon Store</title>
-</head>
-<body>
+<!-- CONTATO -->
+<div class="contato">
+    <h2>🍋 Contato</h2>
+    <p>TikTok: @lemonstoref</p>
+    <p>Discord: https://discord.gg/dPyaNVxfF</p>
+</div>
 
-<h1>🍋 Lemon Store 🍋</h1>
+<!-- ESTOQUE -->
+<section class="estoque">
 
-</body>
-</html>
+<h2 class="titulo">🛒 Marretas Disponíveis</h2>
+
+<table class="tabela">
+<tr>
+<th>Marreta</th>
+<th>Preço</th>
+<th>Ação</th>
+</tr>
+
+<tr><td>Cesta de Blueberry</td><td>R$ 4,00</td><td><button onclick="addItem('Cesta de Blueberry',4.00)">Comprar</button></td></tr>
+
+<tr><td>Party Balloons</td><td>R$ 16,00</td><td><button onclick="addItem('Party Balloons',16.00)">Comprar</button></td></tr>
+
+<tr><td>Dark Mansion</td><td>R$ 1,50</td><td><button onclick="addItem('Dark Mansion',1.50)">Comprar</button></td></tr>
+
+<tr><td>Choco Dip</td><td>R$ 1,40</td><td><button onclick="addItem('Choco Dip',1.40)">Comprar</button></td></tr>
+
+<tr><td>Bleak Ink</td><td>R$ 4,50</td><td><button onclick="addItem('Bleak Ink',4.50)">Comprar</button></td></tr>
+
+<tr><td>Sakura Parasol</td><td>R$ 3,75</td><td><button onclick="addItem('Sakura Parasol',3.75)">Comprar</button></td></tr>
+
+<tr><td>Unicorn Starlight</td><td>R$ 0,30</td><td><button onclick="addItem('Unicorn Starlight',0.30)">Comprar</button></td></tr>
+
+<tr><td>Candy Egg</td><td>R$ 0,50</td><td><button onclick="addItem('Candy Egg',0.50)">Comprar</button></td></tr>
+
+<tr><td>Sakura</td><td>R$ 0,50</td><td><button onclick="addItem('Sakura',0.50)">Comprar</button></td></tr>
+
+<tr><td>Neapolitan</td><td>R$ 0,50</td><td><button onclick="addItem('Neapolitan',0.50)">Comprar</button></td></tr>
+
+<tr><td>Peppermint Bark</td><td>R$ 0,35</td><td><button onclick="addItem('Peppermint Bark',0.35)">Comprar</button></td></tr>
+
+<tr><td>Cranberry Barrel</td><td>R$ 0,90</td><td><button onclick="addItem('Cranberry Barrel',0.90)">Comprar</button></td></tr>
+
+<tr><td>Frozen Fortress</td><td>R$ 1,00</td><td><button onclick="addItem('Frozen Fortress',1.00)">Comprar</button></td></tr>
+
+<tr><td>Spring World</td><td>R$ 2,50</td><td><button onclick="addItem('Spring World',2.50)">Comprar</button></td></tr>
+
+<tr><td>Forbidden Fortress</td><td>R$ 0,50</td><td><button onclick="addItem('Forbidden Fortress',0.50)">Comprar</button></td></tr>
+
+<tr><td>Haybale</td><td>R$ 0,50</td><td><button onclick="addItem('Haybale',0.50)">Comprar</button></td></tr>
+
+<tr><td>Pristine Chocolatery</td><td>R$ 2,00</td><td><button onclick="addItem('Pristine Chocolatery',2.00)">Comprar</button></td></tr>
+
+<tr><td>Moonlit Butterflies</td><td>R$ 0,45</td><td><button onclick="addItem('Moonlit Butterflies',0.45)">Comprar</button></td></tr>
+
+<tr><td>Flourished Fountain</td><td>R$ 1,00</td><td><button onclick="addItem('Flourished Fountain',1.00)">Comprar</button></td></tr>
+
+</table>
+
+</section>
+
+<!-- CARRINHO -->
+<section class="carrinho">
+
+<h2>🛒 Carrinho</h2>
+
+<ul id="listaCarrinho"></ul>
+
+<h3>Total: R$ <span id="total">0.00</span></h3>
+
+<button onclick="limparCarrinho()">Remover do Carrinho</button>
+<button onclick="copiarPedido()">📋 Copiar Carrinho</button>
+
+</section>
+
+<style>
+
+.tabela{
+width:90%;
+margin:auto;
+border-collapse:collapse;
+font-size:14px;
+}
+
+.tabela th{
+background:#ffee58;
+padding:12px;
+}
+
+.tabela td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+button{
+background:#ffee58;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+cursor:pointer;
+font-size:13px;
+}
+
+.carrinho{
+margin:40px auto;
+width:90%;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.contato{
+text-align:center;
+padding:20px;
+font-size:14px;
+}
+
+</style>
+
+<script>
+
+let carrinho = [];
+let total = 0;
+
+function addItem(nome, preco){
+    carrinho.push({nome, preco});
+    total += preco;
+    atualizarCarrinho();
+}
+
+function atualizarCarrinho(){
+    const lista = document.getElementById("listaCarrinho");
+    lista.innerHTML = "";
+
+    carrinho.forEach(item=>{
+        let li = document.createElement("li");
+        li.textContent = item.nome + " - R$ " + item.preco.toFixed(2);
+        lista.appendChild(li);
+    });
+
+    document.getElementById("total").textContent = total.toFixed(2);
+}
+
+function limparCarrinho(){
+    carrinho = [];
+    total = 0;
+    atualizarCarrinho();
+}
+
+function copiarPedido(){
+
+let texto = "🍋 LEMON STORE 🍋\n\n";
+
+carrinho.forEach(item=>{
+texto += "• " + item.nome + " - R$ " + item.preco.toFixed(2) + "\n";
+});
+
+texto += "\nTotal: R$ " + total.toFixed(2);
+texto += "\n\nTikTok: @lemonstoref";
+texto += "\nDiscord: https://discord.gg/dPyaNVxfF";
+
+navigator.clipboard.writeText(texto);
+
+alert("Pedido copiado! Envie para @lemonstoref");
+
+}
+
+  </script>
